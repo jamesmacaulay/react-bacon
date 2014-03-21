@@ -1,0 +1,16 @@
+{
+  "name": "react-bacon",
+  "version": "0.0.1",
+  "description": "A little module for using React with Bacon.js",
+  "main": "src/react-bacon.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jamesmacaulay/react-bacon"
+  },
+  "author": "James MacAulay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamesmacaulay/react-bacon/issues"
+  },
+  "homepage": "https://github.com/jamesmacaulay/react-bacon"
+}

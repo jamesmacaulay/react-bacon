@@ -1,9 +1,4 @@
 module.exports.BaconMixin = ((function(){
-  // If `filterKey` is not present, return a `Bacon.Property` for the whole props/state:
-  // var allPropsProperty = propsOrStateProperty(this, 'allProps', 'props');
-  // 
-  // If `filterKey` is present, return a property for the given props/state key:
-  // var fooStateProperty = propsOrStateProperty(this, 'allState', 'state', 'foo');
   function propsOrStateProperty(component, allPropsOrStateKey, groupKey, filterKey) {
     var bacon = component._bacon = component._bacon || {};
     var allPropertyKey = 'properties.'+allPropsOrStateKey;
@@ -13,7 +8,6 @@ module.exports.BaconMixin = ((function(){
       var bus = bacon['buses.'+allPropsOrStateKey] = new Bacon.Bus();
       property = bacon[allPropertyKey] = bus.toProperty(component[groupKey]).skipDuplicates();
     }
-    // if a filterKey is given, return a memoized property for the given prop or state (skipping duplicates)
     if (filterKey != null) {
       var wholePropsOrStateProperty = property;
       var filteredPropertyKey = groupedPropertiesKey+'.'+filterKey;
@@ -28,7 +22,6 @@ module.exports.BaconMixin = ((function(){
           toProperty();
       }
     }
-    // otherwise, return the property for the whole props/state (including duplicates)
     return property;
   }
   return ({

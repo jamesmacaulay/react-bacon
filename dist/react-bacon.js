@@ -1,10 +1,5 @@
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.ReactBacon=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports.BaconMixin = ((function(){
-  // If `filterKey` is not present, return a `Bacon.Property` for the whole props/state:
-  // var allPropsProperty = propsOrStateProperty(this, 'allProps', 'props');
-  // 
-  // If `filterKey` is present, return a property for the given props/state key:
-  // var fooStateProperty = propsOrStateProperty(this, 'allState', 'state', 'foo');
   function propsOrStateProperty(component, allPropsOrStateKey, groupKey, filterKey) {
     var bacon = component._bacon = component._bacon || {};
     var allPropertyKey = 'properties.'+allPropsOrStateKey;
@@ -14,7 +9,6 @@ module.exports.BaconMixin = ((function(){
       var bus = bacon['buses.'+allPropsOrStateKey] = new Bacon.Bus();
       property = bacon[allPropertyKey] = bus.toProperty(component[groupKey]).skipDuplicates();
     }
-    // if a filterKey is given, return a memoized property for the given prop or state (skipping duplicates)
     if (filterKey != null) {
       var wholePropsOrStateProperty = property;
       var filteredPropertyKey = groupedPropertiesKey+'.'+filterKey;
@@ -29,7 +23,6 @@ module.exports.BaconMixin = ((function(){
           toProperty();
       }
     }
-    // otherwise, return the property for the whole props/state (including duplicates)
     return property;
   }
   return ({

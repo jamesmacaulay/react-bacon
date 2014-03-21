@@ -2,6 +2,8 @@
 
 A little module for using [React](http://facebook.github.io/) with [Bacon.js](http://baconjs.github.io/).
 
+Here's [a JSFiddle](http://jsfiddle.net/jamesmacaulay/Wc7bb/)!
+
 ## Installation
 
 For [browserify](http://browserify.org/) projects, `npm install --save react-bacon`.

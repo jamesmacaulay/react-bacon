@@ -34,8 +34,8 @@ Registers an event handler function on the component with the given name, which 
 
 The stream is memoized by the `functionName`, and gets cleaned up with a `Bacon.End` when the component unmounts.
 
-### component.plug(stream, _[stateKey]_)
+### component.plug(observable, _[stateKey]_)
 
-Plugs a Bacon observable into the component's state, and returns an unsubscribe function. If a `stateKey` is given, then values from the observable are assigned to the given key. If no `stateKey` is given, the values must be whole state objects (assigned with `setState`, not `replaceState`).
+Plugs a Bacon observable into the component's state, and returns an unsubscribe function. If a `stateKey` is given, then values from the observable are assigned to the given key. If no `stateKey` is given, the values must be objects which are passed directly to `setState` to assign multiple state keys at once.
 
 The component will unsubscribe from the stream when it unmounts.

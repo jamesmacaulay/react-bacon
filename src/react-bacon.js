@@ -1,4 +1,6 @@
 module.exports.BaconMixin = ((function(){
+  'use strict';
+
   function propsOrStateProperty(component, allPropsOrStateKey, groupKey, filterKey) {
     var bacon = component._bacon = component._bacon || {};
     var allPropertyKey = 'properties.'+allPropsOrStateKey;
@@ -79,7 +81,7 @@ module.exports.BaconMixin = ((function(){
 
         var eventBuses = bacon['buses.events'];
         if (eventBuses) {
-          for (eventName in eventBuses) {
+          for (var eventName in eventBuses) {
             eventBuses[eventName].end();
           }
         }

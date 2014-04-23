@@ -38,7 +38,7 @@ module.exports.BaconMixin = ((function(){
       var buses = bacon['buses.events'] = bacon['buses.events'] || {};
       var bus = buses[eventName];
       if (!bus) {
-        bus = buses[eventName] = buses[eventName] || new Bacon.Bus();
+        bus = buses[eventName] = new Bacon.Bus();
         this[eventName] = function sendEventToStream(event) {
           bus.push(event);
         };

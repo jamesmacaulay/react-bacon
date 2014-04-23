@@ -1,4 +1,6 @@
 module.exports.BaconMixin = ((function(){
+  'use strict';
+
   function propsOrStateProperty(component, allPropsOrStateKey, groupKey, filterKey) {
     var bacon = component._bacon = component._bacon || {};
     var allPropertyKey = 'properties.'+allPropsOrStateKey;
@@ -36,7 +38,7 @@ module.exports.BaconMixin = ((function(){
       var buses = bacon['buses.events'] = bacon['buses.events'] || {};
       var bus = buses[eventName];
       if (!bus) {
-        bus = buses[eventName] || new Bacon.Bus();
+        bus = buses[eventName] = new Bacon.Bus();
         this[eventName] = function sendEventToStream(event) {
           bus.push(event);
         };
@@ -80,9 +82,9 @@ module.exports.BaconMixin = ((function(){
         var allStateBus = bacon['buses.allState'];
         allStateBus && allStateBus.end();
 
-        var eventBuses = bacon['buses.events']
+        var eventBuses = bacon['buses.events'];
         if (eventBuses) {
-          for (eventName in eventBuses) {
+          for (var eventName in eventBuses) {
             eventBuses[eventName].end();
           }
         }

@@ -36,10 +36,13 @@ module.exports.BaconMixin = ((function(){
     eventStream: function(eventName) {
       var bacon = this._bacon = this._bacon || {};
       var buses = bacon['buses.events'] = bacon['buses.events'] || {};
-      var bus = buses[eventName] = buses[eventName] || new Bacon.Bus();
-      this[eventName] = function sendEventToStream(event) {
-        bus.push(event);
-      };
+      var bus = buses[eventName];
+      if (!bus) {
+        bus = buses[eventName] = buses[eventName] || new Bacon.Bus();
+        this[eventName] = function sendEventToStream(event) {
+          bus.push(event);
+        };
+      }
       return bus;
     },
     plug: function(stream, stateKey) {

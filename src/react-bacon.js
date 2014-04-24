@@ -39,8 +39,18 @@ module.exports.BaconMixin = ((function(){
       var bus = buses[eventName];
       if (!bus) {
         bus = buses[eventName] = new Bacon.Bus();
-        this[eventName] = function sendEventToStream(event) {
+        var handler = this[eventName] = function sendEventToStream(event) {
           bus.push(event);
+        };
+
+        handler.with = function(customEventProps) {
+          return function sendEventWithCustomPropsToStream(event) {
+            for (var prop in customEventProps) {
+              event[prop] = customEventProps[prop];
+            }
+
+            return handler(event);
+          };
         };
       }
       return bus;

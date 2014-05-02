@@ -11,7 +11,8 @@ module.exports = function(grunt) {
         options: {
           bundleOptions: {
             standalone: 'ReactBacon'
-          }
+          },
+          transform: ['browserify-shim']
         }
       },
       test: {

@@ -19,9 +19,13 @@
     "grunt-contrib-jasmine": "~0.6.3",
     "browserify": "~3.44.2",
     "grunt-browserify": "~2.0.8",
-    "reactify": "~0.13.1"
+    "reactify": "~0.13.1",
+    "browserify-shim": "~3.4.1"
   },
   "dependencies": {
     "baconjs": "~0.7.10"
+  },
+  "browserify-shim": {
+    "baconjs": "global:Bacon"
   }
 }

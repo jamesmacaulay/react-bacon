@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 var Utils = React.addons.TestUtils;
-Bacon = require('baconjs');
+var Bacon = require('baconjs');
 var BaconMixin = require('react-bacon').BaconMixin;
 
 describe('BaconMixin', function() {

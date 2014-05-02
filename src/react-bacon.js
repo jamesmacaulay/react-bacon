@@ -1,3 +1,5 @@
+var Bacon = require('baconjs');
+
 module.exports.BaconMixin = ((function(){
   'use strict';
 

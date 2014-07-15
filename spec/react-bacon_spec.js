@@ -83,20 +83,25 @@ describe('BaconMixin', function() {
           stream.onValue(function() {
             // Does something
           });
+          this.onValue(this.props.bus, this.handleEvent);
         },
+        handleEvent: function () {},
         render: function() {
           return <div onClick={this.clicks}/>
         }
       });
 
-      var component = Utils.renderIntoDocument(<Component />);
+      var bus = new Bacon.Bus();
+      var component = Utils.renderIntoDocument(<Component bus={bus} />);
 
       expect(stream.hasSubscribers()).toBe(true);
+      expect(bus.hasSubscribers()).toBe(true);
 
       var unmounted = React.unmountComponentAtNode(component.getDOMNode().parentNode);
       expect(unmounted).toBe(true);
 
       expect(stream.hasSubscribers()).toBe(false);
+      expect(bus.hasSubscribers()).toBe(false);
     });
   });
 });

@@ -4,6 +4,8 @@ A little module for using [React](http://facebook.github.io/) with [Bacon.js](ht
 
 Here's [a JSFiddle](http://jsfiddle.net/jamesmacaulay/Wc7bb/)!
 
+Here's [another one](http://jsfiddle.net/bebraw/3526a/1/) from @bebraw that does stuff with weather forecasts!
+
 ## Installation
 
 For [browserify](http://browserify.org/) projects, `npm install --save react-bacon`.

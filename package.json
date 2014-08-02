@@ -1,6 +1,6 @@
 {
   "name": "react-bacon",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A little module for using React with Bacon.js",
   "main": "src/react-bacon.js",
   "repository": {

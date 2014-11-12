@@ -91,12 +91,12 @@ describe('BaconMixin', function() {
 
       var component = Utils.renderIntoDocument(<Component />);
 
-      expect(stream.hasSubscribers()).toBe(true);
+      expect(stream.dispatcher.hasSubscribers()).toBe(true);
 
       var unmounted = React.unmountComponentAtNode(component.getDOMNode().parentNode);
       expect(unmounted).toBe(true);
 
-      expect(stream.hasSubscribers()).toBe(false);
+      expect(stream.dispatcher.hasSubscribers()).toBe(false);
     });
   });
 });

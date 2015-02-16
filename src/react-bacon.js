@@ -47,6 +47,11 @@ module.exports.BaconMixin = ((function(){
       }
       return bus;
     },
+    subscribeTo: function(unsub) {
+      var bacon = this._bacon = this._bacon || {};
+      var unsubscribers = bacon.unsubscribers = bacon.unsubscribers || [];
+      unsubscribers.push(unsub);
+    },
     plug: function(stream, stateKey) {
       var unsubscribe;
       var component = this;

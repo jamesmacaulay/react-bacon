@@ -47,6 +47,22 @@ module.exports.BaconMixin = ((function(){
       }
       return bus;
     },
+    domEventStream: function(eventName, prevDefault, stopPropagation) {
+      var bacon = this._bacon = this._bacon || {};
+      var buses = bacon['buses.events'] = bacon['buses.events'] || {};
+      var bus = buses[eventName];
+      if (typeof prevDefault == "undefined") prevDefault = true;
+      if (typeof stopPropagation == "undefined") stopPropagation = true;
+      if (!bus) {
+        bus = buses[eventName] = new Bacon.Bus();
+        this[eventName] = function sendEventToStream(event) {
+          prevDefault     && event.preventDefault();
+          stopPropagation && event.stopPropagation();
+          bus.push(event);
+        };
+      }
+      return bus;
+    },
     subscribeTo: function(unsub) {
       var bacon = this._bacon = this._bacon || {};
       var unsubscribers = bacon.unsubscribers = bacon.unsubscribers || [];

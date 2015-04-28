@@ -71,13 +71,11 @@ module.exports.BaconMixin = ((function(){
       var bacon = this._bacon = this._bacon || {};
       var unsubscribers = bacon.unsubscribers = bacon.unsubscribers || [];
       unsubscribers.push(unsub);
+      return unsub;
     },
     plug: function(stream, stateKey) {
       var unsubscribe;
       var component = this;
-      var bacon = this._bacon = this._bacon || {};
-      var unsubscribers = bacon.unsubscribers = bacon.unsubscribers || [];
-
       if (stateKey == null) {
         unsubscribe = stream.onValue(function(partialState) {
           component.setState(partialState);
@@ -89,8 +87,7 @@ module.exports.BaconMixin = ((function(){
           component.setState(partialState);
         });
       }
-      unsubscribers.push(unsubscribe);
-      return unsubscribe;
+      return this.subscribeTo(unsubscribe);
     },
     componentDidUpdate: function() {
       var bacon = this._bacon;
@@ -118,7 +115,7 @@ module.exports.BaconMixin = ((function(){
 
         var unsubscribers = bacon.unsubscribers;
         if (unsubscribers) {
-          unsubscribers.forEach(function(f) {f()});
+          unsubscribers.forEach(function(f) {f();});
         }
       }
     }

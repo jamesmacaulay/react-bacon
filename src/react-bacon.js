@@ -3,6 +3,17 @@ var Bacon = require('baconjs');
 module.exports.BaconMixin = ((function(){
   'use strict';
 
+  function eventBus(component, eventName, generator) {
+    var bacon = component._bacon = component._bacon || {};
+    var buses = bacon['buses.events'] = bacon['buses.events'] || {};
+    var bus = buses[eventName];
+    if (!bus) {
+      bus = buses[eventName] = new Bacon.Bus();
+      component[eventName] = generator(bus);
+    }
+    return bus;
+  }
+
   function propsOrStateProperty(component, allPropsOrStateKey, groupKey, filterKey) {
     var bacon = component._bacon = component._bacon || {};
     var allPropertyKey = 'properties.'+allPropsOrStateKey;
@@ -36,32 +47,25 @@ module.exports.BaconMixin = ((function(){
       return propsOrStateProperty(this, 'allState', 'state', stateName);
     },
     eventStream: function(eventName) {
-      var bacon = this._bacon = this._bacon || {};
-      var buses = bacon['buses.events'] = bacon['buses.events'] || {};
-      var bus = buses[eventName];
-      if (!bus) {
-        bus = buses[eventName] = new Bacon.Bus();
-        this[eventName] = function sendEventToStream(event) {
-          bus.push(event);
-        };
-      }
-      return bus;
+      return eventBus(this, eventName, function (bus) {
+        return function sendEventToStream(event) { bus.push(event); };
+      });
+    },
+    valueStream: function(eventName) {
+      return eventBus(this, eventName, function (bus) {
+        return function sendEventToStream(event) { bus.push(event.target.value); };
+      });
     },
     domEventStream: function(eventName, prevDefault, stopPropagation) {
-      var bacon = this._bacon = this._bacon || {};
-      var buses = bacon['buses.events'] = bacon['buses.events'] || {};
-      var bus = buses[eventName];
       if (typeof prevDefault == "undefined") prevDefault = true;
       if (typeof stopPropagation == "undefined") stopPropagation = true;
-      if (!bus) {
-        bus = buses[eventName] = new Bacon.Bus();
-        this[eventName] = function sendEventToStream(event) {
+      return eventBus(this, eventName, function (bus) {
+        return function sendEventToStream(event) {
           prevDefault     && event.preventDefault();
           stopPropagation && event.stopPropagation();
           bus.push(event);
         };
-      }
-      return bus;
+      });
     },
     subscribeTo: function(unsub) {
       var bacon = this._bacon = this._bacon || {};

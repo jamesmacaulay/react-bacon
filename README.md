@@ -1,10 +1,14 @@
+### _This project is no longer maintained_
+
+It probably still works, but maybe not for long with the latest versions of React and/or Bacon.js. It's not a lot of code, so I encourage you to fork the project and turn it into exactly what you need.
+
+If you'd like to take over maintenance of this project, feel free to get in touch either over [twitter](https://twitter.com/jamesmacaulay) or by [opening an issue](https://github.com/jamesmacaulay/react-bacon/issues/new).
+
 # react-bacon
 
 A little module for using [React](http://facebook.github.io/) with [Bacon.js](http://baconjs.github.io/).
 
 Here's [a JSFiddle](http://jsfiddle.net/jamesmacaulay/Wc7bb/)!
-
-Here's [another one](http://jsfiddle.net/bebraw/3526a/1/) from @bebraw that does stuff with weather forecasts!
 
 ## Installation
 

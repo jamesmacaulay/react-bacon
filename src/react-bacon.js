@@ -56,6 +56,15 @@ module.exports.BaconMixin = ((function(){
         return function sendEventToStream(event) { bus.push(event.target.value); };
       });
     },
+    inputStream: function(eventName) {
+      return eventBus(this, eventName, function (bus) {
+        return function sendEventToStream(event) {
+          var v = {};
+          v[event.target.name] = event.target.value;
+          bus.push(v);
+        };
+      });
+    },
     domEventStream: function(eventName, prevDefault, stopPropagation) {
       if (typeof prevDefault == "undefined") prevDefault = true;
       if (typeof stopPropagation == "undefined") stopPropagation = true;

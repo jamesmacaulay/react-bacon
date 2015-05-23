@@ -67,6 +67,12 @@ module.exports.BaconMixin = ((function(){
       unsubscribers.push(unsubscribe);
       return unsubscribe;
     },
+    onValue: function (observable) {
+      var bacon = this._bacon = this._bacon || {};
+      var unsubscribers = bacon.unsubscribers = bacon.unsubscribers || [];
+      var args = Array.prototype.slice.call(arguments, 1);
+      unsubscribers.push(observable.onValue.apply(observable, args));
+    },
     componentDidUpdate: function() {
       var bacon = this._bacon;
       if (bacon) {

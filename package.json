@@ -1,31 +1,40 @@
 {
   "name": "react-bacon",
-  "version": "0.0.4",
-  "description": "A little module for using React with Bacon.js",
-  "main": "src/react-bacon.js",
+  "version": "0.1.0",
+  "description": "Incorporate BaconJS into the ReactJS render cycle",
+  "main": "dist/index.js",
+  "author": "Rodolfo Hansen",
+  "homepage": "https://github.com/kryptt/react-bacon",
+  "license": "MIT",
+  "keywords": [
+    "async",
+    "react",
+    "bacon",
+    "reactive",
+    "streams",
+    "isomorphic"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jamesmacaulay/react-bacon"
+    "url": "https://github.com/kryptt/react-bacon"
   },
-  "author": "James MacAulay",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jamesmacaulay/react-bacon/issues"
+    "url": "https://github.com/kryptt/react-bacon/issues"
   },
-  "homepage": "https://github.com/jamesmacaulay/react-bacon",
+  "scripts": {
+    "build": "gulp"
+  },
   "devDependencies": {
-    "react": "~0.10.0",
-    "grunt": "~0.4.4",
-    "grunt-contrib-jasmine": "~0.6.3",
-    "browserify": "~3.44.2",
-    "grunt-browserify": "~2.0.8",
-    "reactify": "~0.13.1",
-    "browserify-shim": "~3.4.1"
+    "gulp": "^3.9.0",
+    "gulp-livescript": "^2.4.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.6",
+    "livescript": "^1.4.0"
   },
   "dependencies": {
-    "baconjs": "~0.7.10"
+    "baconjs": "^0.7.70"
   },
-  "browserify-shim": {
-    "baconjs": "global:Bacon"
+  "peerDependencies": {
+    "react": "~0.13"
   }
 }

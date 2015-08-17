@@ -85,10 +85,10 @@ module.exports = {
   domEventStream: function(en, preventDefault, stopPropagation){
     return eventBus(this, en, function(bus){
       return function(it){
-        if (preventDefault && it.preventDefault != null) {
+        if (!!preventDefault && it.preventDefault != null) {
           it.preventDefault();
         }
-        if (stopPropagation && it.stopPropagation != null) {
+        if (!!stopPropagation && it.stopPropagation != null) {
           it.stopPropagation();
         }
         bus.push(it);

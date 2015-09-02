@@ -20,9 +20,9 @@ event-bus = (it, name, generator) ->
 
 module.exports =
   # offer a bacon event stream for the component's properties.
-  stream-props : (pn) -> if pn? then ensure-props @ else ensure-props @ .map -> it[pn]
+  stream-props : (pn) -> unless pn? then ensure-props @ else ensure-props @ .map -> it[pn]
   # offer a bacon event stream for the component's state.
-  stream-state : (sn) -> if sn? then ensure-state @ else ensure-state @ .map -> it[sn]
+  stream-state : (sn) -> unless sn? then ensure-state @ else ensure-state @ .map -> it[sn]
   # register a callback hook and offer a stream on the other end of it.
   event-stream : (en) -> event-bus @, en, (bus) -> !-> bus.push it
   # similar to event-stream except we push it.target.value through the stream.

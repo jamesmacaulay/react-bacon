@@ -24,15 +24,15 @@ Right now the library includes a single React mixin, `BaconMixin`.
 
 `BaconMixin` provides a few different methods for your components:
 
-### component.propsProperty(_[propName]_)
+### component.streamProps(_[propName]_)
 
 Returns a memoized `Bacon.Property` backed by the component's props, skipping duplicate values. When a `propName` is present, the values of the property are those of the given prop. If no `propName` is given, the property's values are the whole props objects of the component.
 
 The properties returned are cleaned up with a `Bacon.End` when the component unmounts.
 
-### component.stateProperty(_[stateName]_)
+### component.streamState(_[stateName]_)
 
-Like `propsProperty(propName)`, but for state values.
+Like `streamProps(propName)`, but for state values.
 
 ### component.eventStream(functionName)
 
